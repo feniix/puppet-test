@@ -1,0 +1,7 @@
+puppet/.librarian
+puppet/.tmp/
+puppet/Puppetfile.lock
+puppet/modules/apt
+puppet/modules/stdlib
+puppet/modules/firewall
+puppet/modules/nginx
