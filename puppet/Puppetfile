@@ -1,7 +1,0 @@
-forge "http://forge.puppetlabs.com"
-
-mod 'puppetlabs/apt', '1.4.0'
-mod 'puppetlabs/stdlib', '3.2.0'
-mod 'puppetlabs/firewall', '0.4.2'
-
-mod 'spantree/nginx', '0.0.2'
