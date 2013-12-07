@@ -1,4 +1,5 @@
-#!/usr/bin/env bash -e
+#!/bin/bash -e
 
-cd puppet
+pushd puppet
 sudo puppet apply --modulepath=modules manifests/site.pp
+popd
