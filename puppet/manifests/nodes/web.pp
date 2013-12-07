@@ -6,14 +6,6 @@ node /.*web.*/ {
 
   Stage['main'] -> Stage['last']
 
-  $www_root = '/srv/www_root'
-  file { $www_root:
-    ensure => 'directory',
-    owner  => 'www-data',
-    group  => 'www-data',
-    mode   => '0550',
-  }
-
   class { 'apt':
     stage => 'bootstrap',
   }
@@ -38,6 +30,25 @@ node /.*web.*/ {
     action => 'accept',
   }
 
+  package { 'unzip':
+    ensure => installed,
+    name   => 'unzip',
+  }
+
+  $github_url = 'https://github.com'
+  $github_user = 'puppetlabs'
+  $project = 'exercise-webpage'
+  $branch = 'master'
+  $www_root = "/srv/${project}-${branch}"
+
+  archive { "${project}-${branch}":
+    ensure    => present,
+    url       => "${github_url}/${github_user}/${project}/archive/${branch}.zip",
+    target    => '/srv',
+    extension => 'zip',
+    checksum  => false,
+  }
+
   class { 'nginx':
     confd_purge => true
   }
@@ -56,11 +67,9 @@ node /.*web.*/ {
       $ipaddress,
     ],
   }
-
-  /*
-  class { 'webcontent':
-    stage => last,
+  nginx::resource::mailhost { 'localhost-mail':
+    ensure      => absent,
+    listen_port => '-1',
   }
-  */
 }
 
