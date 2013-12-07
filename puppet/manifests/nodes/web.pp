@@ -1,4 +1,5 @@
-node /.*web.*/ {
+# set this as default node to avoid complexities of setting up hostnames
+node default { 
 
   stage { 'bootstrap': before => Stage['first'] }
   stage { 'first':     before => Stage['main'] }
